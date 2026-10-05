@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>FruitVision AI</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="logo">🍓</div>
+
+            <div>
+                <h2>FruitVision</h2>
+                <span>AI Computer Vision</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-btn active"
+                    onclick="showPage('dashboard', this)">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav-btn"
+                    onclick="showPage('prediction', this)">
+                🤖 Fruit Prediction
+            </button>
+
+            <button class="nav-btn"
+                    onclick="showPage('enhancement', this)">
+                🎨 Image Enhancement
+            </button>
+
+            <button class="nav-btn"
+                    onclick="showPage('analysis', this)">
+                📊 Analysis
+            </button>
+
+            <button class="nav-btn"
+                    onclick="showPage('about', this)">
+                ℹ️ About Project
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            AI Model Online
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard"
+                 class="page active">
+
+            <div class="topbar">
+
+                <div>
+                    <p class="small-title">
+                        COMPUTER VISION APPLICATION
+                    </p>
+
+                    <h1>FruitVision AI</h1>
+
+                    <p class="subtitle">
+                        Intelligent fruit classification
+                        and image enhancement system.
+                    </p>
+                </div>
+
+                <div class="model-badge">
+                    🟢 MobileNetV2
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div>
+
+                    <span class="tag">
+                        AI POWERED
+                    </span>
+
+                    <h2>
+                        Analyze Your Fruit Images
+                    </h2>
+
+                    <p>
+                        Upload a fruit image and use
+                        computer vision techniques to
+                        enhance and classify it.
+                    </p>
+
+                    <button class="primary"
+                            onclick="openPrediction()">
+                        Start Analysis →
+                    </button>
+
+                </div>
+
+                <div class="hero-icon">
+                    🍎
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <span>🍓</span>
+                    <h3>9</h3>
+                    <p>Fruit Classes</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🖼️</span>
+                    <h3>360</h3>
+                    <p>Dataset Images</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🧠</span>
+                    <h3>AI</h3>
+                    <p>MobileNetV2</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>⚙️</span>
+                    <h3>7</h3>
+                    <p>Enhancement Tools</p>
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+                Application Workflow
+            </div>
+
+            <div class="workflow">
+
+                <div>
+                    <b>01</b>
+                    <h3>Upload</h3>
+                    <p>Select fruit image</p>
+                </div>
+
+                <div>
+                    <b>02</b>
+                    <h3>Enhance</h3>
+                    <p>Apply CV techniques</p>
+                </div>
+
+                <div>
+                    <b>03</b>
+                    <h3>Analyze</h3>
+                    <p>Run AI prediction</p>
+                </div>
+
+                <div>
+                    <b>04</b>
+                    <h3>Result</h3>
+                    <p>View confidence</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PREDICTION -->
+
+        <section id="prediction"
+                 class="page">
+
+            <div class="page-header">
+
+                <p class="small-title">
+                    AI CLASSIFICATION
+                </p>
+
+                <h1>Fruit Prediction</h1>
+
+                <p>
+                    Upload an image and let
+                    MobileNetV2 identify the fruit.
+                </p>
+
+            </div>
+
+
+            <div class="prediction-grid">
+
+                <div class="upload-card">
+
+                    <h2>📤 Upload Image</h2>
+
+                    <label class="upload-box">
+
+                        <input type="file"
+                               id="predictionImage"
+                               accept="image/*"
+                               onchange="previewPrediction()">
+
+                        <div id="uploadContent">
+
+                            <div class="upload-icon">
+                                📷
+                            </div>
+
+                            <h3>
+                                Choose a fruit image
+                            </h3>
+
+                            <p>
+                                JPG, JPEG or PNG
+                            </p>
+
+                        </div>
+
+                        <img id="predictionPreview"
+                             class="preview">
+
+                    </label>
+
+                    <button class="primary full"
+                            onclick="predictFruit()">
+                        🔍 Predict Fruit
+                    </button>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <p class="small-title">
+                        AI RESULT
+                    </p>
+
+                    <div id="predictionResult">
+
+                        <div class="empty-result">
+                            <span>🤖</span>
+                            <h2>Waiting for image</h2>
+                            <p>
+                                Upload an image to start
+                                classification.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ENHANCEMENT -->
+
+        <section id="enhancement"
+                 class="page">
+
+            <div class="page-header">
+
+                <p class="small-title">
+                    COMPUTER VISION
+                </p>
+
+                <h1>Image Enhancement</h1>
+
+                <p>
+                    Explore different image processing
+                    techniques.
+                </p>
+
+            </div>
+
+
+            <div class="enhance-layout">
+
+                <div class="control-card">
+
+                    <h2>🎨 Enhancement Controls</h2>
+
+                    <input type="file"
+                           id="enhanceImage"
+                           accept="image/*"
+                           onchange="previewEnhancement()">
+
+                    <select id="method">
+
+                        <option>Original</option>
+                        <option>Resize / Zoom</option>
+                        <option>Average Blur</option>
+                        <option>Gaussian Blur</option>
+                        <option>Edge Detection</option>
+                        <option>Sharpening</option>
+
+                    </select>
+
+                    <button class="primary full"
+                            onclick="enhanceImage()">
+                        ✨ Apply Enhancement
+                    </button>
+
+                </div>
+
+
+                <div class="image-card">
+
+                    <div class="image-column">
+
+                        <h3>Original Image</h3>
+
+                        <img id="originalEnhance"
+                             class="large-preview">
+
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                    <div class="image-column">
+
+                        <h3>Processed Image</h3>
+
+                        <img id="processedEnhance"
+                             class="large-preview">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYSIS -->
+
+        <section id="analysis"
+                 class="page">
+
+            <div class="page-header">
+
+                <p class="small-title">
+                    MODEL INFORMATION
+                </p>
+
+                <h1>Analysis</h1>
+
+                <p>
+                    Technical information about the
+                    computer vision system.
+                </p>
+
+            </div>
+
+
+            <div class="analysis-grid">
+
+                <div class="info-card">
+
+                    <span>🧠</span>
+
+                    <h2>MobileNetV2</h2>
+
+                    <p>
+                        Transfer learning based CNN
+                        architecture used for fruit
+                        classification.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>📐</span>
+
+                    <h2>224 × 224</h2>
+
+                    <p>
+                        Input image resolution used
+                        during model prediction.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>🎯</span>
+
+                    <h2>9 Classes</h2>
+
+                    <p>
+                        Apple, Banana, Cherry, Chickoo,
+                        Grapes, Kiwi, Mango, Orange
+                        and Strawberry.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>🛠️</span>
+
+                    <h2>OpenCV</h2>
+
+                    <p>
+                        Used for resizing, filtering,
+                        edge detection and sharpening.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section id="about"
+                 class="page">
+
+            <div class="page-header">
+
+                <p class="small-title">
+                    PROJECT DOCUMENTATION
+                </p>
+
+                <h1>About FruitVision AI</h1>
+
+                <p>
+                    Mini Computer Vision Application
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <h2>Project Objective</h2>
+
+                <p>
+                    FruitVision AI is a computer vision
+                    application designed to classify
+                    fruit images using a deep learning
+                    model and demonstrate practical
+                    image enhancement techniques.
+                </p>
+
+
+                <h2>Technologies</h2>
+
+                <div class="tech-list">
+
+                    <span>Python</span>
+                    <span>TensorFlow</span>
+                    <span>MobileNetV2</span>
+                    <span>OpenCV</span>
+                    <span>Flask</span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+
+                </div>
+
+
+                <h2>Enhancement Techniques</h2>
+
+                <ul>
+
+                    <li>Resize / Zoom</li>
+                    <li>Average Blur</li>
+                    <li>Gaussian Blur</li>
+                    <li>Histogram Analysis</li>
+                    <li>Edge Detection</li>
+                    <li>Image Sharpening</li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
